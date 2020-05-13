@@ -57,11 +57,12 @@ def ccs(s, l):
 ######################################################################
 # 8 QEENS
 '''
+chessDeskSize = 8
+chessRange = range(1, chessDeskSize)
+
 def zipWith(f, l1, l2):
   if (isnull(l1) or isnull(l2)): return nil
   else: return cons(f(head(l1), head(l2)), zipWith(f, tail(l1), tail(l2)))
-
-chessRange = range(1, 8)
 
 def good(j, l):
   bs = zipWith(lambda x, y: y==j or y-x==j or y+x==j, chessRange, l)
@@ -85,7 +86,7 @@ def concat(l): return nil if isnull(l) else append(head(l), concat(tail(l)))
 
 #print(show(concat(l(l(1,2), l(3,4), l(5,6)))))
 
-queens = ntimes(8, lambda ls: concat(map(addq, ls)), l(l()))
+queens = ntimes(chessDeskSize, lambda ls: concat(map(addq, ls)), l(l()))
 
 #print(show(queens))
 
@@ -103,4 +104,18 @@ def posToStr(l):
 
 queensStr = foldl(lambda a, x: a + posToStr(x) + "\n", "", queens)
 print(queensStr)
+'''
+
+'''
+Haskell
+
+n = 8
+
+f l = map (:l) . filter (flip good l) $ [1..n]
+
+good j = not . any (\(x,y) -> y==j || y-x==j || y+x==j) . zip [1..]
+
+t = iterate (>>= f) [[]] !! n
+
+main = putStrLn ("amount of variants: " ++ show (length t)) >> mapM print t
 '''
