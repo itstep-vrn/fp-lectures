@@ -70,15 +70,3 @@ ull d(int b, int e, int l) {
     std::cout << d(0, n, 0) << "\n";
     std::cout << max_l << "\n";
 */
-
-
-
-// Haskel code
-/*
-m i = i
-
-h n s = if (n<0) then s else h (n-1) (m n + s)
-
-main = print $ h 10 0
-*/
-

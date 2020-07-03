@@ -1,5 +1,3 @@
-######################### LIST TASK EXAMPLES #########################
-
 ######################################################################
 # LIST LIBRARY
 
@@ -31,32 +29,8 @@ def filter(f, l):
 
 def range(a, b): return nil if (a>b) else cons(a, range(a+1, b))
 
-######################################################################
-# COIN CHANGE
-
-coins = l(1, 5, 10, 25, 50)
-
-def cc(s, l):
-  if (s==0): return 1
-  elif (s<0 or isnull(l)): return 0
-  else:
-    c = head(l)
-    r = range(0, s//c)
-    v = map(lambda n: cc(s-n*c, tail(l)), r)
-    return foldl(lambda a, x: a+x, 0, v)
-
-#print("COIN CHANGE", cc(100, coins))
-
-def ccs(s, l):
-  if (s==0): return 1
-  elif (s<0 or isnull(l)): return 0
-  else: return ccs(s-head(l), l) + ccs(s, tail(l))
-
-#print("COIN CHANGE", ccs(100, coins))
-
-######################################################################
 # 8 QEENS
-'''
+
 chessDeskSize = 8
 chessRange = range(1, chessDeskSize)
 
@@ -104,18 +78,3 @@ def posToStr(l):
 
 queensStr = foldl(lambda a, x: a + posToStr(x) + "\n", "", queens)
 print(queensStr)
-'''
-
-'''
-Haskell
-
-n = 8
-
-f l = map (:l) . filter (flip good l) $ [1..n]
-
-good j = not . any (\(x,y) -> y==j || y-x==j || y+x==j) . zip [1..]
-
-t = iterate (>>= f) [[]] !! n
-
-main = putStrLn ("amount of variants: " ++ show (length t)) >> mapM print t
-'''
